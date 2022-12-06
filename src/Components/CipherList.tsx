@@ -16,7 +16,8 @@ const CipherList: FC = () => {
 			))}
 		</List>
 	)
-}
+};
+
 interface MessageExample {
 	name: string;
 	description: string;

@@ -39,7 +39,7 @@ const FixedBottomNavigation: FC = () => {
 			</BottomNavigation>
 		</BottomNavigationStyle>
 	)
-}
+};
 
 const cipherList: string[] = ['reverse', 'test1', 'test2', 'test3', 'test4', 'test5', 'test6'];
 export default FixedBottomNavigation;

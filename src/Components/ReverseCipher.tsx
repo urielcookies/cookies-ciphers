@@ -4,6 +4,6 @@ const ReverseCipher: FC = () => {
 	return (
 		<div>ReverseCipher</div>
 	)
-}
+};
 
-export default ReverseCipher
+export default ReverseCipher;

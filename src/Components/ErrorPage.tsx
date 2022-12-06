@@ -18,6 +18,6 @@ const ErrorPage: FC = () => {
 			<Button color="info" onClick={() => navigate('/ciphers')}>Return to Ciphers</Button>
 		</div>
 	)
-}
+};
 
-export default ErrorPage
+export default ErrorPage;
