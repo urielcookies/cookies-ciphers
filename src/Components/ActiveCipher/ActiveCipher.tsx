@@ -3,9 +3,12 @@ import { FC } from "react";
 import { Typography } from "@mui/material";
 import { Location, useLocation } from "react-router-dom";
 
+import { CAESAR, REVERSE } from "../../Utils/Constants";
+
 import ReverseCipher from "../ReverseCipher/ReverseCipher";
+import CaesarCipher from "../CaesarCipher/CaesarCipher";
+
 import ActiveCipherStyle from "./ActiveCipherStyle";
-import { REVERSE } from "../../Utils/Constants";
 
 
 const ActiveCipher: FC = () => {
@@ -20,13 +23,15 @@ const ActiveCipher: FC = () => {
 			</Typography>
 
 			{isEqual(activeCipher, REVERSE) && <ReverseCipher />}
+			{isEqual(activeCipher, CAESAR) && <CaesarCipher />}
 
 		</ActiveCipherStyle>
 	)
 };
 
 const ciphersTitle: { [key: string]: string } = {
-	reverse: 'Reverse'
+	reverse: 'Reverse',
+	caesar: 'Caesar'
 };
 
 export default ActiveCipher;
