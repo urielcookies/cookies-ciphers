@@ -3,9 +3,10 @@ import { FC } from "react";
 import { Typography } from "@mui/material";
 import { Location, useLocation } from "react-router-dom";
 
-
 import ReverseCipher from "../ReverseCipher/ReverseCipher";
 import ActiveCipherStyle from "./ActiveCipherStyle";
+import { REVERSE } from "../../Utils/Constants";
+
 
 const ActiveCipher: FC = () => {
 	const location: Location = useLocation();
@@ -18,7 +19,7 @@ const ActiveCipher: FC = () => {
 				{ciphersTitle[activeCipher]}
 			</Typography>
 
-			{isEqual(activeCipher, 'reverse') && <ReverseCipher />}
+			{isEqual(activeCipher, REVERSE) && <ReverseCipher />}
 
 		</ActiveCipherStyle>
 	)
