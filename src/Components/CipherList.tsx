@@ -8,9 +8,9 @@ const CipherList: FC = () => {
 	const listOnClickHandler = (link: string) => navigate(link);
 
 	return (
-		<List>
+		<List sx={{ padding: '0' }}>
 			{map(messageExamples, ({ name, description, link }: MessageExample, index: number) => (
-				<ListItem button key={index + link} onClick={() => listOnClickHandler(link)}>
+				<ListItem sx={{ padding: '0' }} button key={index + link} onClick={() => listOnClickHandler(link)}>
 					<ListItemText primary={name} secondary={description} />
 				</ListItem>
 			))}

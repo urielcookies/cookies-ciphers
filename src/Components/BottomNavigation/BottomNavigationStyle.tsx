@@ -5,6 +5,7 @@ const BottomNavigationStyle: StyledComponent<"div", any, {}, never> = styled.div
 	bottom: 0;
 	left: 0;
 	right: 0;
+	height: 7vh;
 	border-top: .5px solid grey;
 `;
 
