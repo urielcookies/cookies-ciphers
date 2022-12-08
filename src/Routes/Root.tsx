@@ -14,7 +14,7 @@ import About from '../Components/About';
 import ErrorPage from '../Components/ErrorPage';
 import FixedBottomNavigation from '../Components/BottomNavigation/BottomNavigation';
 import withHeightVH from '../HOCs/withHeightVH';
-import { BASENAME, PUBLIC_URL } from '../Utils/Constants';
+import { BASENAME } from '../Utils/Constants';
 
 
 const AppLayout = () => (
@@ -28,8 +28,6 @@ const AppLayout = () => (
 const CipherListHOC = withHeightVH(CipherList);
 const ActiveCipherHOC = withHeightVH(ActiveCipher);
 const AboutHOC = withHeightVH(About);
-
-console.info(PUBLIC_URL);
 
 const router = createBrowserRouter(
 	createRoutesFromElements(

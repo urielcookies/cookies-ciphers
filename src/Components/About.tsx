@@ -8,8 +8,11 @@ const About: FC = () => {
 			display: 'flex',
 			alignItems: 'center',
 			justifyContent: 'center',
+			textAlign: 'center'
 		}}>
 			Hi Evelyn ❤️
+			<br />
+			Installed Build: 0.25
 		</div>
 	)
 };
