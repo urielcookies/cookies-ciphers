@@ -43,5 +43,5 @@ const FixedBottomNavigation: FC = () => {
 	)
 };
 
-const cipherList: string[] = [REVERSE, CAESAR, 'test2', 'test3', 'test4', 'test5', 'test6'];
+const cipherList: string[] = [REVERSE, CAESAR];
 export default FixedBottomNavigation;
