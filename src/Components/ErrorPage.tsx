@@ -15,6 +15,9 @@ const ErrorPage: FC = () => {
 			<p>
 				<i>{error.statusText || error.message}</i>
 			</p>
+			<p>
+				<i style={{ color: 'red' }}>{window.location.href}</i>
+			</p>
 			<Button color="info" onClick={() => navigate('/ciphers')}>Return to Ciphers</Button>
 		</div>
 	)

@@ -12,7 +12,7 @@ const About: FC = () => {
 		}}>
 			Hi Evelyn ❤️
 			<br />
-			Installed Build: 0.25
+			Installed Build: 0.26
 		</div>
 	)
 };
