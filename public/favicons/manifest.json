@@ -2,7 +2,7 @@
 	"short_name": "Ciphers",
 	"name": "Cookies Ciphers",
 	"description": "Cracking Codes",
-	"start_url": "../index.html",
+	"start_url": "../",
 	"display": "standalone",
 	"theme_color": "#000000",
 	"background_color": "#ffffff",
