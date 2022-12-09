@@ -88,10 +88,25 @@ function registerValidSW(swUrl: string, config?: Config) {
 								'tabs for this page are closed. See https://cra.link/PWA.'
 							);
 
-							toast.info(`Update available! To update, close all windows and reopen.`, {
+
+							// refreshPage & redirectHome functions after user click on banner
+							// for software update
+							const refreshPage = () =>
+								new Promise((resolve) => {
+									resolve(window.location.reload())
+								});
+
+							const redirectHome = async () => {
+								await refreshPage();
+								window.location.href = `${window.location.origin}/cookies-ciphers`
+							}
+
+							toast.info('Update available! To update, close all windows and reopen or click this message', {
 								toastId: "appUpdateAvailable", // Prevent duplicate toasts
-								onClick: () => window.close(), // Closes windows on click
-								autoClose: false // Prevents toast from auto closing
+								onClick: () => redirectHome(), // Closes windows on click
+								autoClose: false, // Prevents toast from auto closing
+								position: toast.POSITION.TOP_CENTER,
+								closeButton: false
 							});
 
 							// Execute callback

@@ -7,6 +7,9 @@ import {
 	RouterProvider
 } from 'react-router-dom';
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import CipherList from '../Components/CipherList';
 import ActiveCipher from '../Components/ActiveCipher/ActiveCipher';
 import About from '../Components/About';
@@ -19,6 +22,7 @@ import { BASENAME } from '../Utils/Constants';
 
 const AppLayout = () => (
 	<>
+		<ToastContainer />
 		<Outlet />
 		<FixedBottomNavigation />
 	</>
