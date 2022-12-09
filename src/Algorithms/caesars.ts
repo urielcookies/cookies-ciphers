@@ -1,36 +1,19 @@
-import { forEach, includes, isEqual } from "lodash";
+import { isEqual, reduce } from "lodash";
 import { SYMBOLS } from "../Utils/Constants";
 
-const caesars = (message: string, mode: string, key: number) => {
-	let translated = '';
-
-	forEach(message, (symbol) => {
-		if (includes(SYMBOLS, symbol)) {
-			const symbolIndex = SYMBOLS.indexOf(symbol);
-
-			let translatedIndex = 0;
-			if (isEqual(mode, 'encrypt')) {
-				translatedIndex = symbolIndex + key;
-			}
-			else if (isEqual(mode, 'decrypt')) {
-				translatedIndex = symbolIndex - key;
-			}
-
-			if (translatedIndex >= SYMBOLS.length) {
-				translatedIndex = translatedIndex - SYMBOLS.length;
-			}
-			else if (translatedIndex < 0) {
-				translatedIndex = translatedIndex + SYMBOLS.length;
-			}
-
-			translated = translated + SYMBOLS[translatedIndex];
+const caesars = (message: string, mode: string, key: number) =>
+	reduce(message, (result, char) => {
+		const index = SYMBOLS.indexOf(char);
+		let newIndex = index;
+		if (!isEqual(index, -1)) {
+			if (isEqual(mode, 'encrypt')) newIndex = newIndex + key;
+			if (isEqual(mode, 'decrypt')) newIndex = newIndex - key;
 		}
-		else {
-			translated = translated + symbol;
-		}
-	});
 
-	return translated;
-};
+		if (newIndex >= SYMBOLS.length) newIndex = newIndex - SYMBOLS.length;
+		if (newIndex < 0) newIndex = newIndex + SYMBOLS.length;
+
+		return result += SYMBOLS[newIndex];
+	}, '');
 
 export default caesars;
