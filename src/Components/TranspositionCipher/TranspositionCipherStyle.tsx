@@ -1,6 +1,6 @@
 import styled, { StyledComponent } from 'styled-components';
 
-const CaesarCipherStyle: StyledComponent<"div", any, {}, never> = styled.div`
+const TranspositionsCipherStyle: StyledComponent<"div", any, {}, never> = styled.div`
 	.encrypting-controls {
 		display: flex;
 		justify-content: space-between;
@@ -40,4 +40,4 @@ const CaesarCipherStyle: StyledComponent<"div", any, {}, never> = styled.div`
 	}
 `;
 
-export default CaesarCipherStyle;
+export default TranspositionsCipherStyle;

@@ -1,11 +1,5 @@
-import {
-	ChangeEvent,
-	ChangeEventHandler,
-	FC,
-	SyntheticEvent,
-	useState
-} from "react";
-import { isEmpty, isEqual, map } from "lodash";
+import { ChangeEvent, ChangeEventHandler, FC, SyntheticEvent, useCallback, useEffect, useState } from 'react'
+import { includes, isEmpty, isEqual, map } from 'lodash';
 
 import {
 	Alert,
@@ -19,22 +13,22 @@ import {
 	TextareaAutosize
 } from "@mui/material";
 
-import caesars from '../../Algorithms/caesars';
-import { SYMBOLS } from "../../Utils/Constants";
+import transposition from '../../Algorithms/transposition';
 
-import CaesarCipherStyle from "./CaesarCipherStyle";
+import TranspositionCipherStyle from './TranspositionCipherStyle';
 
-const CaesarCipher: FC = () => {
+
+const TranspositionCipher: FC = () => {
 	const [activeMessage, setActiveMessage] = useState<string>('');
 	const [activeSnackbar, setActiveSnackbar] = useState<boolean>(false);
-	const [encryptionKey, setEncryptionKey] = useState<number>(0);
+	const [encryptionKey, setEncryptionKey] = useState<number>(2);
 	const [encryptionMode, setEncryptionMode] = useState<string>('encrypt');
 	const [textareaValue, setTextareaValue] = useState<string>('');
 
 	const clearMessage: () => void = () => {
 		setActiveMessage('');
 		setTextareaValue('');
-		setEncryptionKey(0);
+		setEncryptionKey(2);
 		setEncryptionMode('encrypt');
 	};
 
@@ -42,21 +36,21 @@ const CaesarCipher: FC = () => {
 		(event: SelectChangeEvent<string>) => {
 			const selectValue = event.target.value;
 			setEncryptionMode(selectValue);
-			setActiveMessage(caesars(textareaValue, selectValue, encryptionKey));
+			setActiveMessage(transposition(textareaValue, selectValue, encryptionKey));
 		};
 
 	const encryptionKeyHandler: (event: SelectChangeEvent<string>) => void =
 		(event: SelectChangeEvent<string>) => {
 			const selectValue = event.target.value;
 			setEncryptionKey(Number(selectValue));
-			setActiveMessage(caesars(textareaValue, encryptionMode, Number(selectValue)));
+			setActiveMessage(transposition(textareaValue, encryptionMode, Number(selectValue)));
 		};
 
 	const cipherMessageOnChangeHandler: ChangeEventHandler =
 		(event: ChangeEvent<HTMLInputElement>) => {
 			const inputValue = event.target.value;
 			setTextareaValue(inputValue);
-			setActiveMessage(caesars(inputValue, encryptionMode, encryptionKey));
+			setActiveMessage(transposition(inputValue, encryptionMode, encryptionKey));
 		};
 
 	const copyHandler: () => void = () => {
@@ -69,8 +63,45 @@ const CaesarCipher: FC = () => {
 		setActiveSnackbar(false);
 	};
 
+	const keyOptionsRenderer = useCallback(() => {
+		const options: JSX.Element[] = [];
+		const keyNumbers: number = Math.floor(textareaValue.length / 2)
+		for (let i = 0; i <= keyNumbers; i++) {
+			options.push(
+				<MenuItem key={i} value={i}>{i}</MenuItem>
+			);
+		}
+
+		if (options.length > 2) {
+			// Needs to start with key 2
+			options.shift();
+			options.shift();
+			return options;
+		} else return [
+			<MenuItem
+				key={0}
+				value="No Key Avaliable (type a message)">
+				No Key Avaliable (type a message)
+			</MenuItem>
+		];
+	}, [textareaValue.length])
+
+	useEffect(() => {
+		if (encryptionKey > keyOptionsRenderer().length) {
+			setEncryptionKey(keyOptionsRenderer().length + 1);
+		}
+	}, [encryptionKey, keyOptionsRenderer, textareaValue]);
+
+	const keyValueCalculatorHandler = () => {
+		const keys = map(map(keyOptionsRenderer(), 'key'), Number);
+		if (textareaValue.length >= 4 && !includes(keys, encryptionKey))
+			return String(encryptionKey - 1);
+
+		return textareaValue.length >= 4 ? String(encryptionKey) : 'No Key Avaliable (type a message)';
+	}
+
 	return (
-		<CaesarCipherStyle>
+		<TranspositionCipherStyle>
 			<div className="encrypting-controls">
 				<FormControl className="form-modes" >
 					<InputLabel id="options-encryption">Modes</InputLabel>
@@ -89,13 +120,11 @@ const CaesarCipher: FC = () => {
 					<InputLabel id="options-key">Key</InputLabel>
 					<Select
 						labelId="options-key"
-						value={String(encryptionKey)}
+						value={keyValueCalculatorHandler()}
 						label="Key"
 						onChange={encryptionKeyHandler}
 					>
-						{map(SYMBOLS, (symbol, index) => (
-							<MenuItem key={symbol} value={index}>{index}</MenuItem>
-						))}
+						{keyOptionsRenderer()}
 					</Select>
 				</FormControl>
 			</div>
@@ -142,8 +171,8 @@ const CaesarCipher: FC = () => {
 				</Alert>
 			</Snackbar>
 
-		</CaesarCipherStyle>
+		</TranspositionCipherStyle>
 	)
 };
 
-export default CaesarCipher;
+export default TranspositionCipher;

@@ -14,6 +14,11 @@ const cipherListData: readonly CipherListData[] = [
 		name: 'Caesar',
 		description: 'Shifts alphabet and numbers based on the key (number) selected',
 		link: 'caesar',
+	},
+	{
+		name: 'Transposition',
+		description: 'unkown yet',
+		link: 'transposition',
 	}
 ];
 

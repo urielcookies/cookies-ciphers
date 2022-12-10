@@ -11,7 +11,7 @@ import {
 	MessageOutlined as MessageIcon
 } from '@mui/icons-material';
 
-import { CAESAR, REVERSE } from '../../Utils/Constants';
+import { CAESAR, REVERSE, TRANSPOSITION } from '../../Utils/Constants';
 
 import BottomNavigationStyle from './BottomNavigationStyle';
 
@@ -43,5 +43,5 @@ const FixedBottomNavigation: FC = () => {
 	)
 };
 
-const cipherList: string[] = [REVERSE, CAESAR];
+const cipherList: string[] = [REVERSE, CAESAR, TRANSPOSITION];
 export default FixedBottomNavigation;

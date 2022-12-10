@@ -1,7 +1,5 @@
 export const PUBLIC_URL = process.env.PUBLIC_URL;
 export const BASENAME = '/cookies-ciphers';
-export const REVERSE = 'reverse';
-export const CAESAR = 'caesar';
 export const SYMBOLS = [
 	'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
 	'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
@@ -11,3 +9,6 @@ export const SYMBOLS = [
 	':', `"`, ',', '.', '/', '<', '>', '?', ' '
 ];
 
+export const REVERSE = 'reverse';
+export const CAESAR = 'caesar';
+export const TRANSPOSITION = 'transposition';
