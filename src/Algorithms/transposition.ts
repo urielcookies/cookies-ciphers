@@ -43,7 +43,8 @@ const decrypt = (message: string, key: number) => {
 	forEach(message, (char) => {
 		// If in last array
 		if (indexKey === (temp.length - 1)) {
-			const test = key - temp[indexKey].length
+			const test = key - temp[indexKey].length;
+			// if last array reached its limit
 			if (test === shadowBoxes) {
 				indexKey = 0;
 				temp[indexKey].push(char);

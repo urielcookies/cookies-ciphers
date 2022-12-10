@@ -7,17 +7,17 @@ interface CipherListData {
 const cipherListData: readonly CipherListData[] = [
 	{
 		name: 'Reverse',
-		description: "Makes a string of words in reverse",
+		description: "Message in reverse.",
 		link: 'reverse',
 	},
 	{
 		name: 'Caesar',
-		description: 'Shifts alphabet and numbers based on the key (number) selected',
+		description: 'Each letter in the plaintext is replaced by a letter some fixed number of positions down the alphabet.',
 		link: 'caesar',
 	},
 	{
 		name: 'Transposition',
-		description: 'unkown yet',
+		description: 'Scrambles the positions of characters without changing the characters themselves.',
 		link: 'transposition',
 	}
 ];
