@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, SyntheticEvent } from 'react';
 import { isEqual } from 'lodash';
 import { NavigateFunction, useNavigate } from "react-router-dom";
 
@@ -21,23 +21,25 @@ const FixedBottomNavigation: FC = () => {
 	const navigate: NavigateFunction = useNavigate();
 	const { state, dispatch } = useStore();
 
+	const navigationOnChange = (_e: SyntheticEvent<Element, Event>, newValue: number) => {
+		if (isEqual(newValue, 0)) navigate('/ciphers');
+		if (isEqual(newValue, 1)) navigate(`/ciphers/${state.activeCipher}`);
+		if (isEqual(newValue, 2)) navigate('/about');
+
+		dispatch({
+			type: Types.UpdateActiveBottomNavigation,
+			payload: newValue
+		})
+	}
+
 	return (
 		<BottomNavigationStyle>
 			<BottomNavigation
 				showLabels
 				value={state.activeBottomNavigation}
-				onChange={(_event, newValue: number) => {
-					if (isEqual(newValue, 0)) navigate('/ciphers');
-					if (isEqual(newValue, 2)) navigate('/about');
-
-					dispatch({
-						type: Types.UpdateActiveBottomNavigation,
-						payload: newValue
-					})
-				}}
-			>
+				onChange={navigationOnChange}>
 				<BottomNavigationAction label="Ciphers" icon={<ListIcon />} />
-				<BottomNavigationAction disabled label="Active" icon={<MessageIcon />} />
+				<BottomNavigationAction label="Active" icon={<MessageIcon />} />
 				<BottomNavigationAction label="About" icon={<InfoIcon />} />
 			</BottomNavigation>
 		</BottomNavigationStyle>
