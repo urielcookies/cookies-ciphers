@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import { includes, isEqual, replace } from 'lodash';
-import { Location, NavigateFunction, useLocation, useNavigate } from "react-router-dom";
+import { isEqual } from 'lodash';
+import { NavigateFunction, useNavigate } from "react-router-dom";
 
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
@@ -11,28 +11,29 @@ import {
 	MessageOutlined as MessageIcon
 } from '@mui/icons-material';
 
-import { CAESAR, REVERSE, TRANSPOSITION } from '../../Utils/Constants';
+import { useStore } from '../../Context/StoreContextProvider';
+import { Types } from '../../Context/reducers';
 
 import BottomNavigationStyle from './BottomNavigationStyle';
 
 
 const FixedBottomNavigation: FC = () => {
 	const navigate: NavigateFunction = useNavigate();
-	const location: Location = useLocation();
-
-	const navigationIndexFinder: () => 0 | 1 | 2 | undefined = () => {
-		if (isEqual(location.pathname, '/ciphers')) return 0;
-		if (includes(cipherList, replace(location.pathname, '/ciphers/', ''))) return 1;
-		if (isEqual(location.pathname, '/about')) return 2;
-	};
+	const { state, dispatch } = useStore();
 
 	return (
 		<BottomNavigationStyle>
 			<BottomNavigation
 				showLabels
-				value={navigationIndexFinder()}
-				onChange={(event, newValue: number) => {
-					navigate(['/ciphers', 'null', '/about'][newValue])
+				value={state.activeBottomNavigation}
+				onChange={(_event, newValue: number) => {
+					if (isEqual(newValue, 0)) navigate('/ciphers');
+					if (isEqual(newValue, 2)) navigate('/about');
+
+					dispatch({
+						type: Types.UpdateActiveBottomNavigation,
+						payload: newValue
+					})
 				}}
 			>
 				<BottomNavigationAction label="Ciphers" icon={<ListIcon />} />
@@ -43,5 +44,4 @@ const FixedBottomNavigation: FC = () => {
 	)
 };
 
-const cipherList: string[] = [REVERSE, CAESAR, TRANSPOSITION];
 export default FixedBottomNavigation;
