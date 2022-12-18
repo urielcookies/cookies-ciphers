@@ -1,53 +1,12 @@
-// import { createContext, useContext, useState } from 'react';
-
-// interface Store {
-// 	store: {
-// 		activeUser: string;
-// 	};
-// 	setStoreHandler: (data: Store["store"]) => void;
-// }
-
-// const defaultStore = {
-// 	store: {
-// 		activeUser: '',
-// 	},
-// 	setStoreHandler: (data: Store["store"]) => { },
-// }
-
-// const StoreContext = createContext<Store>(defaultStore);
-
-// const StoreContextProvider = ({ children }: { children: JSX.Element }) => {
-// 	const [store, setStore] = useState<Store["store"]>(defaultStore.store);
-
-// 	const setStoreHandler = (data: Store["store"]) => {
-// 		setStore(data);
-// 	};
-
-// 	return (
-// 		<StoreContext.Provider value={{ store, setStoreHandler }}>
-// 			{children}
-// 		</StoreContext.Provider>
-// 	);
-// };
-
-// const useStore = () => useContext(StoreContext);
-
-// export {
-// 	StoreContextProvider,
-// 	useStore,
-// };
-
-// export type { Store };
-
-
-
-import React, { createContext, useReducer, Dispatch, useContext } from 'react';
+import { createContext, useReducer, Dispatch, useContext } from 'react';
 import {
+	// reducers
 	productReducer,
 	shoppingCartReducer,
 	activeCipherReducer,
 	activeBottomNavigationReducer,
 
+	// interfaces for actions
 	ProductActions,
 	ShoppingCartActions,
 	ActiveCipherActions,
@@ -99,7 +58,6 @@ const StoreContextProvider = ({ children }: { children: JSX.Element }) => {
 	)
 }
 
-// export { StoreContextProvider, AppContext };
 const useStore = () => useContext(AppContext);
 
 export {
